@@ -5,24 +5,20 @@ const mysql = require("mysql");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "1234",
-  database: "cruddatabase",
+  password: "",
+  database: "stock",
 });
 
 app.get("/", (req, res) => {
   const sqlInsert =
-    "INSERT INTO movie_reviews (movieName, movieReview) VALUES ('Inception', 'Good movie');";
+    "INSERT INTO item (item_id, item_name, quantity, price) VALUES ('I002', 'powder', 4, 200);";
   db.query(sqlInsert, (err, result) => {
     if (err) {
-      console.error("Error executing SQL query:", err);
-      res
-        .status(500)
-        .send("An error occurred while inserting into the database.");
-        
-    } else {
-      console.log("1 record inserted");
-      res.send("File added successfully.");
+      console.log(err);
+      return res.send("An error occurred while inserting data.");
     }
+    console.log("Data inserted successfully.");
+    res.send("Data inserted successfully.");
   });
 });
 
