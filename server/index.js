@@ -10,7 +10,7 @@ const db = mysql.createPool({
 });
 app.get("/", (req, res) => {
   const sqlInsert =
-    "INSERT INTO movie_review(movieName, movieReview) VALUES ('bala', 'goodmovie');";
+    "INSERT INTO movie_review(movieName, movieReview) VALUES ('guna', 'avaragemovie');";
   db.query(sqlInsert, (err, result) => {
     if (err) {
       console.log(err);
