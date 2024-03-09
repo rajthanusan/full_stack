@@ -6,12 +6,11 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "stock",
+  database: "curd",
 });
-
 app.get("/", (req, res) => {
   const sqlInsert =
-    "INSERT INTO item (item_id, item_name, quantity, price) VALUES ('I002', 'powder', 4, 200);";
+    "INSERT INTO movie_review(movieName, movieReview) VALUES ('bala', 'goodmovie');";
   db.query(sqlInsert, (err, result) => {
     if (err) {
       console.log(err);
