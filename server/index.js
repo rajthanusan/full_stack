@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const app = express();
 const mysql = require("mysql");
 
@@ -8,16 +10,22 @@ const db = mysql.createPool({
   password: "",
   database: "curd",
 });
-app.get("/", (req, res) => {
+app.use(cors())
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended:true}))
+
+app.post("/api/insert", (req, res) => {
+
+  const movieName=req.body.movieName
+  const movieReview=req.body.movieReview
+
+
+
   const sqlInsert =
-    "INSERT INTO movie_review(movieName, movieReview) VALUES ('guna', 'avaragemovie');";
-  db.query(sqlInsert, (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.send("An error occurred while inserting data.");
-    }
-    console.log("Data inserted successfully.");
-    res.send("Data inserted successfully.");
+    "INSERT INTO movie_review(movieName, movieReview) VALUES (?, ?)";
+  db.query(sqlInsert, [movieName,movieReview], (err, result) => {
+    console.log(err)
+    
   });
 });
 
